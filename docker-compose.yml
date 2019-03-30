@@ -1,0 +1,118 @@
+version: '3.5'
+
+x-domain: &domain
+  DOMAIN: mydomain.com
+
+services:
+  peppy:
+    container_name: peppy
+    image: shobble/pep.py
+    depends_on:
+      - redis
+      - db
+    restart: on-failure
+
+  lets:
+    container_name: lets
+    image: shobble/lets
+    environment:
+      OSUKEY: "insertkey :)"
+    volumes:
+      - ./lets:/let.s/.data
+    depends_on:
+      - redis
+      - db
+    restart: on-failure
+
+  hanayo:
+    container_name: hanayo
+    image: shobble/hanayo
+    environment: *domain
+    volumes:
+      - ./avatars/:/avatars
+    depends_on:
+      - redis
+      - db
+      - rippleapi
+    restart: on-failure
+
+  rippleapi:
+    container_name: rippleapi
+    image: shobble/rippleapi
+    depends_on:
+      - redis
+      - db
+    restart: on-failure
+
+  avatar_server:
+    container_name: avatar_server
+    image: shobble/avatar-server
+    volumes:
+      - ./avatars/:/avatar_server/avatars
+    restart: on-failure
+
+  old_frontend:
+    container_name: old_frontend
+    image: shobble/old-frontend
+    environment: *domain
+    ports:
+      - 8088:80
+    depends_on:
+      - rippleapi
+    restart: on-failure
+
+  db:
+    container_name: db
+    image: shobble/rippledb
+    volumes:
+      - ./db_data/:/var/lib/mysql
+    restart: on-failure
+
+  web:
+    container_name: web
+    image: shobble/rippleginx
+    volumes:
+      - ./keys/:/keys/
+    environment: *domain
+    depends_on:
+      - hanayo
+      - lets
+      - peppy
+      - old_frontend
+      - avatar_server
+    ports:
+      - 80:80
+      - 443:443
+    restart: on-failure
+
+  redis:
+    container_name: redis
+    image: redis
+    volumes:
+      - redis_vol:/data
+    restart: on-failure
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - ./portainer/:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: on-failure
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    volumes:
+      - phpmysessions:/sessions
+    ports:
+      - 8056:80
+    restart: on-failure
+
+volumes:
+  redis_vol:
+  phpmysessions:
