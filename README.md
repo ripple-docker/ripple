@@ -1,6 +1,7 @@
 # ripple
 
 Just clone somewhere, put your osu api key and your domain into the docker-compose.yml file at adequate places.  
+Put a default avatar into `./avatars/0.png`  
 You also need to generate ssl keys. Run something like this.
 ```
 mkdir keys
