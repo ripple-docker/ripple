@@ -1,5 +1,7 @@
 # ripple
 
+## Betaish and no mania pp support (probably). No support provided
+
 Clone this repos somewhere and put adequate values into the `.env` file.  
 Put a default avatar into `./avatars/0.png`  
 You also need to generate ssl keys. Run something like this.  
