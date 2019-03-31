@@ -3,6 +3,8 @@ services:
   peppy:
     container_name: peppy
     image: shobble/pep.py
+    environment:
+      - MYSQL_ROOT_PASSWORD
     depends_on:
       - redis
       - db
@@ -13,6 +15,7 @@ services:
     image: shobble/lets
     environment:
       - OSUKEY
+      - MYSQL_ROOT_PASSWORD
     volumes:
       - ./lets:/let.s/.data
     depends_on:
@@ -25,6 +28,7 @@ services:
     image: shobble/hanayo
     environment:
       - DOMAIN
+      - MYSQL_ROOT_PASSWORD
     volumes:
       - ./avatars/:/avatars
     depends_on:
@@ -36,6 +40,8 @@ services:
   rippleapi:
     container_name: rippleapi
     image: shobble/rippleapi
+    environment:
+      - MYSQL_ROOT_PASSWORD
     depends_on:
       - redis
       - db
@@ -53,6 +59,7 @@ services:
     image: shobble/old-frontend
     environment:
       - DOMAIN
+      - MYSQL_ROOT_PASSWORD
     ports:
       - 8088:80
     depends_on:
@@ -62,6 +69,8 @@ services:
   db:
     container_name: db
     image: shobble/rippledb
+    environment:
+      - MYSQL_ROOT_PASSWORD
     volumes:
       - ./db_data/:/var/lib/mysql
     restart: on-failure
