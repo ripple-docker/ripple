@@ -14,4 +14,4 @@ Also make sure you've got valid keys in `./keys/domain.cert.pem` and `keys/domai
 
 With the default configuration, you can access phpmyadmin via `host:8056` and portainer via `host:9000`.
 
-You can always change the `.env` config at a later time and only need to restart the affected containers for the changes to take effect, with the exception of the database password which is stored inside the database after the first launch and thus requires additional steps (aka none of your services can connect because mysql still expects the original password).  
+You can always change the `.env` config at a later time and only need to restart the affected containers for the changes to take effect, with the exception of the database password which is stored inside the database after the first launch and thus requires additional steps (ie none of your services can connect because mysql still expects the original password).  
