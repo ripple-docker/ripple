@@ -5,6 +5,7 @@ services:
     image: shobble/pep.py
     environment:
       - MYSQL_ROOT_PASSWORD
+      - CIKEY
     depends_on:
       - redis
       - db
@@ -16,6 +17,7 @@ services:
     environment:
       - OSUKEY
       - MYSQL_ROOT_PASSWORD
+      - CIKEY
     volumes:
       - ./lets:/let.s/.data
     depends_on:
@@ -29,6 +31,7 @@ services:
     environment:
       - DOMAIN
       - MYSQL_ROOT_PASSWORD
+      - APISECRET
     volumes:
       - ./avatars/:/avatars
     depends_on:
@@ -42,6 +45,7 @@ services:
     image: shobble/rippleapi
     environment:
       - MYSQL_ROOT_PASSWORD
+      - APISECRET
     depends_on:
       - redis
       - db
