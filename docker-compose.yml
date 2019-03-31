@@ -1,8 +1,4 @@
 version: '3.5'
-
-x-domain: &domain
-  DOMAIN: mydomain.com
-
 services:
   peppy:
     container_name: peppy
@@ -16,7 +12,7 @@ services:
     container_name: lets
     image: shobble/lets
     environment:
-      OSUKEY: "insertkey :)"
+      - OSUKEY
     volumes:
       - ./lets:/let.s/.data
     depends_on:
@@ -27,7 +23,8 @@ services:
   hanayo:
     container_name: hanayo
     image: shobble/hanayo
-    environment: *domain
+    environment:
+      - DOMAIN
     volumes:
       - ./avatars/:/avatars
     depends_on:
@@ -54,7 +51,8 @@ services:
   old_frontend:
     container_name: old_frontend
     image: shobble/old-frontend
-    environment: *domain
+    environment:
+      - DOMAIN
     ports:
       - 8088:80
     depends_on:
@@ -73,7 +71,8 @@ services:
     image: shobble/rippleginx
     volumes:
       - ./keys/:/keys/
-    environment: *domain
+    environment:
+      - DOMAIN
     depends_on:
       - hanayo
       - lets
@@ -108,11 +107,10 @@ services:
     depends_on:
       - db
     volumes:
-      - phpmysessions:/sessions
+      - /sessions
     ports:
       - 8056:80
     restart: on-failure
 
 volumes:
   redis_vol:
-  phpmysessions:
