@@ -15,9 +15,9 @@ services:
     container_name: lets
     image: shobble/lets
     environment:
-      - OSUKEY
-      - MYSQL_ROOT_PASSWORD
-      - CIKEY
+      - OSU_API_KEY=$OSUKEY
+      - DB_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - BANCHO_API_KEY=$CIKEY
     volumes:
       - ./lets:/let.s/.data
     depends_on:
