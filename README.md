@@ -15,3 +15,20 @@ Also make sure you've got valid keys in `./keys/domain.cert.pem` and `keys/domai
 With the default configuration, you can access phpmyadmin via `host:8056` and portainer via `host:9000`.
 
 You can always change the `.env` config at a later time and only need to restart the affected containers for the changes to take effect, with the exception of the database password which is stored inside the database after the first launch and thus requires additional steps (ie none of your services can connect because mysql still expects the original password).  
+
+You need to put these lines with the ip of your server into your hosts file:
+```
+192.168.56.104	osu.ppy.sh
+192.168.56.104	c.ppy.sh
+192.168.56.104	c1.ppy.sh
+192.168.56.104	c2.ppy.sh
+192.168.56.104	c3.ppy.sh
+192.168.56.104	c4.ppy.sh
+192.168.56.104	c5.ppy.sh
+192.168.56.104	c6.ppy.sh
+192.168.56.104	ce.ppy.sh
+192.168.56.104	a.ppy.sh
+192.168.56.104	s.ppy.sh
+192.168.56.104	i.ppy.sh
+192.168.56.104	bm6.ppy.sh
+```
