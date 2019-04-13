@@ -32,3 +32,5 @@ You need to put these lines with the ip of your server into your hosts file:
 192.168.56.104	i.ppy.sh
 192.168.56.104	bm6.ppy.sh
 ```
+
+Lastly, import the `./keys/ppy.sh.cert.pem` into your client's Trusted certificate store.
