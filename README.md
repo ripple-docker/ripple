@@ -10,7 +10,7 @@ mkdir keys
 sudo openssl req -x509 -nodes -days 99999 -newkey rsa:2048 -keyout ./keys/ppy.sh.key.pem -out ./keys/ppy.sh.cert.pem -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=*.ppy.sh"
 ```
 
-Also make sure you've got valid keys in `./keys/domain.cert.pem` and `keys/domain.key.pem`. You can either use something like let's encrypt for now or copy the files from above. After that, with docker and docker-compose installed, you should be able to just run `sudo docker-compose up -d` to get the server running. You should also maybe not run phpmyadmin and portainer without any additional protection beyond the initial setup. The default database account is `root:v3ris3cur3` (though you should have changed the password).
+Also make sure you've got valid keys in `./keys/domain.cert.pem` and `./keys/domain.key.pem`. You can either use something like let's encrypt for now or copy the files from above. After that, with docker and docker-compose installed, you should be able to just run `sudo docker-compose up -d` to get the server running. You should also maybe not run phpmyadmin and portainer without any additional protection beyond the initial setup. The default database account is `root:v3ris3cur3` (though you should have changed the password).
 
 With the default configuration, you can access phpmyadmin via `host:8056` and portainer via `host:9000`.
 
